@@ -17,6 +17,8 @@ export default function Home() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [isVerified, setIsverified] = useState<boolean>(false);
 
+  const wordCount = messageText.trim().split(/\s+/).length;
+
   async function handleCaptchaSubmission(token: string | null) {
     await verifyCaptcha(token)
       .then(() => setIsverified(true))
@@ -25,9 +27,11 @@ export default function Home() {
 
   function validateInputs() {
     const numberOnlyRegex = /^\d+$/;
-    const wordCount = messageText.trim().split(/\s+/).length;
 
-    if (numberOnlyRegex.test(fromText) || numberOnlyRegex.test(toText)) {
+    if (
+      numberOnlyRegex.test(fromText.trim().replace(/\s+/g, "")) ||
+      numberOnlyRegex.test(toText.trim().replace(/\s+/g, ""))
+    ) {
       toast.warning("Form fields cannot contain only numbers.", {
         position: "top-right",
         autoClose: 5000,
@@ -193,12 +197,14 @@ export default function Home() {
                 className="border-[1px] text-[#6A6970] font-normal text-sm border-[#CAC4E6] mb-2 px-2.5 bg-white shadow-[0px_0px_30px_0px_#CAC4E6] mt-8 rounded-2xl resize-none w-full h-48 py-1.5 outline-none focus:ring-1 focus:ring-[#CAC4E6]"
                 rows={5}
                 onChange={(e) => setMessageText(e.target.value)}
-                placeholder="Your Messages (Minimal 5 Words)"
+                placeholder="Your Messages"
                 value={messageText}
                 required
                 id=""
               ></textarea>
-
+              <small className="text-[#6A6970] py-0.5">
+                Word count: {wordCount}
+              </small>
               <div className="flex flex-col justify-center items-center">
                 {/* <ReCAPTCHA
                   sitekey={"6LfegAEqAAAAALN9jKDPREMiyUr99G1aLRCi-OBI"}
