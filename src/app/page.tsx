@@ -16,12 +16,54 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [isVerified, setIsverified] = useState<boolean>(false);
+
   async function handleCaptchaSubmission(token: string | null) {
     await verifyCaptcha(token)
       .then(() => setIsverified(true))
       .catch(() => setIsverified(false));
   }
+
+  function validateInputs() {
+    const numberOnlyRegex = /^\d+$/;
+    const wordCount = messageText.trim().split(/\s+/).length;
+
+    if (numberOnlyRegex.test(fromText) || numberOnlyRegex.test(toText)) {
+      toast.warning("Form fields cannot contain only numbers.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      return false;
+    }
+
+    if (wordCount < 5) {
+      toast.warning("Message must contain at least 5 words.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      return false;
+    }
+
+    return true;
+  }
+
   function handlePost() {
+    if (!validateInputs()) {
+      return;
+    }
+
+    // Uncomment the following lines to enable CAPTCHA validation
     // if (!isVerified) {
     //   return toast.warning("Captcha Harus Diisi Terlebih Dahulu", {
     //     position: "top-right",
@@ -34,6 +76,7 @@ export default function Home() {
     //     transition: Bounce,
     //   });
     // }
+
     setLoading(true);
     axios
       .post("/api/", {
@@ -150,7 +193,7 @@ export default function Home() {
                 className="border-[1px] text-[#6A6970] font-normal text-sm border-[#CAC4E6] mb-2 px-2.5 bg-white shadow-[0px_0px_30px_0px_#CAC4E6] mt-8 rounded-2xl resize-none w-full h-48 py-1.5 outline-none focus:ring-1 focus:ring-[#CAC4E6]"
                 rows={5}
                 onChange={(e) => setMessageText(e.target.value)}
-                placeholder="Your Messages"
+                placeholder="Your Messages (Minimal 5 Words)"
                 value={messageText}
                 required
                 id=""
