@@ -126,7 +126,7 @@ export default function Home() {
         height={500}
         src={"/boggie_fest.png"}
         alt={""}
-        className="lg:top-10 lg:right-5 -top-28   lg:w-auto lg:h-72 absolute"
+        className="lg:top-10 lg:right-5 -top-20   lg:w-auto lg:h-72 absolute"
       ></Image>
       <div className="container w-full h-full parent flex flex-col lg:justify-center items-center px-8 py-8 lg:py-0 lg:px-0 relative">
         <Image
@@ -196,6 +196,7 @@ export default function Home() {
                 name=""
                 className="border-[1px] text-[#6A6970] font-normal text-sm border-[#CAC4E6] mb-2 px-2.5 bg-white shadow-[0px_0px_30px_0px_#CAC4E6] mt-8 rounded-2xl resize-none w-full h-48 py-1.5 outline-none focus:ring-1 focus:ring-[#CAC4E6]"
                 rows={5}
+                cols={5}
                 onChange={(e) => setMessageText(e.target.value)}
                 placeholder="Your Messages"
                 value={messageText}
