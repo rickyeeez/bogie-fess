@@ -38,9 +38,10 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   try {
     await connectMongo();
-    const confess = await Confess.find();
+    // Use aggregation with $sample to get 8 random documents
+    const confess = await Confess.aggregate([{ $sample: { size: 8 } }]);
     return NextResponse.json({ data: confess });
   } catch (error) {
-    return NextResponse.json({ error });
+    return NextResponse.json({ error: error });
   }
 }

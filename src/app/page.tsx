@@ -45,7 +45,7 @@ export default function Home() {
       return false;
     }
 
-    if (wordCount < 5) {
+    if (wordCount < 3) {
       toast.warning("Message must contain at least 5 words.", {
         position: "top-right",
         autoClose: 5000,

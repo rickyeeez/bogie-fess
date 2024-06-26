@@ -23,3 +23,68 @@ body {
     color-scheme: light !important;
   }
 }
+@keyframes slideUp {
+  0% {
+    transform: translateY(-20px);
+    height: 0px;
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-110px); /* Adjust this value as needed */
+    opacity: 1;
+  }
+}
+
+.slide-up {
+  animation: slideUp 2s ease-in-out forwards;
+}
+
+@keyframes headEnvelopeRotate {
+  0% {
+    transform-origin: top;
+    transform: scaleY(1) rotateX(0deg);
+  }
+  100% {
+    transform-origin: top;
+    transform: scaleY(1) rotateX(180deg);
+  }
+}
+
+.head-env {
+  animation: headEnvelopeRotate 1s ease-in-out forwards;
+}
+.card {
+  width: 0;
+  height: 0;
+  border-top: 80px solid #eee;
+  border-right: 136px solid #ddd;
+  border-bottom: 80px solid #ccc;
+  border-left: 136px solid #ccc;
+}
+
+.heart {
+  width: 32px;
+  height: 32px;
+  background-color: #ffffff;
+  transform: translate(-50%, -50%);
+  border-radius: 10000px;
+  animation: heartbeat 1.4s linear infinite;
+}
+.heart:hover {
+  animation: heartbeat 0s linear infinite;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
