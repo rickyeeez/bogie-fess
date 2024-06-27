@@ -32,7 +32,7 @@ export default function Home() {
       numberOnlyRegex.test(fromText.trim().replace(/\s+/g, "")) ||
       numberOnlyRegex.test(toText.trim().replace(/\s+/g, ""))
     ) {
-      toast.warning("Form fields cannot contain only numbers.", {
+      toast.warning("Nama dan Pesan tidak boleh berisi pesan angka saja", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -46,7 +46,7 @@ export default function Home() {
     }
 
     if (wordCount < 3) {
-      toast.warning("Message must contain at least 5 words.", {
+      toast.warning("Pesan harus memiliki minimal 3 kata.", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
