@@ -130,6 +130,7 @@ const page = () => {
                     sequence={[envelopeData?.text || ""]}
                     wrapper="span"
                     cursor={true}
+                    speed={75}
                   />
                 </div>
                 <div className="w-full flex justify-center items-center bottom-50 absolute">
